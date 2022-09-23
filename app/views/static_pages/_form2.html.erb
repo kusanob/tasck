@@ -1,0 +1,12 @@
+<%= form_with do |f| %>
+ 
+ <%= f.label :メールアドレス, class: "label-#{yield(:class_text)}" %>
+ <%= f.email_field :email, disabled: true, class: 'form-control' %>
+ 
+ <%= f.label :パスワード, class: "label-#{yield(:class_text)}" %>
+ <%= f.password_field :password, disabled: true, class: 'form-control' %>
+
+ <br>
+
+ <%= f.submit "ログイン状態です。", disabled: true, class: "btn btn-primary btn-block btn-#{yield(:class_text)}" %>
+<% end %>
