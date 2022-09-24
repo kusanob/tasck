@@ -1,0 +1,28 @@
+<% provide(:title, 'タスク一覧') %>
+
+<h2>タスク一覧</h2>
+ 
+ <div class="text-right">
+  <%= link_to "タスク新規作成", "#", class: "btn btn-lg btn-primary" %>
+ </div>
+  <div class= "row">
+    <div class="col-md-10 col-md-offset-1">
+      <table class="table table-hover">
+      
+      <thead>
+        <tr>
+          <th><%= User.human_attribute_name :title %></th>
+          <th><%= User.human_attribute_name :created_at%></th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <tr>
+          <td><%= @task %></td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+  </div>
+
+  

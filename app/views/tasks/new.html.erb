@@ -1,0 +1,16 @@
+<% provide(:title, 'New Task') %>
+
+<h2>タスク新規作成</h2>
+  
+<%= form_with(model: @task, url: tasks_path, local: true) do |f| %>
+
+ <%= f.label :"タイトル" %> 
+ <%= f.text_field :text %>
+
+ <%= f.label :"詳細" %>
+ <%= f.text_field :text %>
+
+ <%= f.submit "新規作成", class: "btn btn-primary btn-block btn-#{yield(:class_text)}" %>
+
+<% end %>
+ 
