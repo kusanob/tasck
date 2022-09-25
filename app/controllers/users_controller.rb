@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :admin_user, only: :new
+   before_action :admin_user, only: new
   
   
   def show
