@@ -21,7 +21,7 @@
         
         <% @tasks.each do |task| %>
           <tr>
-            <td><%= task.title %></td>
+            <td><%= link_to task.title, task_path(task.id) %></td>
             <td><%= task.created_at %></td>
           </tr>
         <% end %>

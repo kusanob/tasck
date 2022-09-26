@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   end
   
   def show
-  @task = Task.find(params[:id])
+    @task = Task.find(params[:id])
   end
   
   def new
@@ -26,10 +26,17 @@ class TasksController < ApplicationController
   end
   
   def edit
-    @task = Task.find(prams[:id])
+    @task = Task.find(params[:id])
   end
   
   def update
+    @task = Task.find(params[:id])
+    if @task.update_attributes(task_params)
+      flash[:success] = "更新しました。"
+      redirect_to @task
+    else
+      edit
+    end
   end
   
 end

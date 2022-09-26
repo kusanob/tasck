@@ -1,26 +1,33 @@
 <% provide(:title, 'show Task') %>
 
 <h2>タスク詳細</h2>
-  <div class="row">
+　<div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <table>
+      <table class="table table-bordered">
         <tr>
-          <th>
-            <td>ID</td>
-            <td>名称</td>
-            <td>詳細</td>
-            <td>作成日</td>
-            <td>更新日</td>
-          </th>
+          <th>ID</th>
+          <td><%= @task.id %></td>
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <th>名称</th>
+          <td><%= @task.title %></td>
+        </tr>
+        <tr>
+          <th>詳細</th>
+          <td><%= @task.detail %></td>
+        </tr>
+        <tr>
+          <th>作成日</th>
+          <td><%= @task.created_at %></td>
+        </tr>
+        <tr>
+          <th>更新日</th>
+          <td><%= @task.updated_at %></td>
         </tr>
       </table>
+      
+      
+      <%= link_to "編集", edit_task_path, class: "btn btn-lg btn-success" %>
+      <%= link_to "削除", "#", class: "btn btn-lg btn-danger" %>
     </div>
   </div>
-<% end %>
