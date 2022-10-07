@@ -12,8 +12,8 @@
       
       <thead>
         <tr>
-          <th><%= User.human_attribute_name :title %></th>
-          <th><%= User.human_attribute_name :created_at%></th>
+          <th><%= Task.human_attribute_name :title %></th>
+          <th><%= Task.human_attribute_name :created_at %></th>
         </tr>
       </thead>
     
@@ -21,8 +21,10 @@
         
         <% @tasks.each do |task| %>
           <tr>
-            <td><%= link_to task.title, task_path(task.id) %></td>
-            <td><%= task.created_at %></td>
+            <td><%= link_to task.title, task_path(task.id), id: "a" %></td>
+            <td><%= l task.created_at, format: :long %></td>
+            <td><%= link_to "編集", edit_task_path(task.id), class: "btn btn-sm btn-success" %>
+            <%= link_to "削除", task_path(task.id), method: :delete, class: "btn btn-sm btn-danger" %></td>
           </tr>
         <% end %>
         
@@ -30,5 +32,3 @@
       </table>
     </div>
   </div>
-
-  

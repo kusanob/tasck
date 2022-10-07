@@ -1,6 +1,17 @@
 /* タスク詳細 */
 
-th {
+.task_th {
   text-align: center;
   background-color: #eee;
+}
+
+#a {
+  padding: 8px;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#a:hover {
+  text-decoration: none;
 }

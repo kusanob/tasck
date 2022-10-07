@@ -5,29 +5,29 @@
     <div class="col-md-6 col-md-offset-3">
       <table class="table table-bordered">
         <tr>
-          <th>ID</th>
+          <th class= "task_th">ID</th>
           <td><%= @task.id %></td>
         </tr>
         <tr>
-          <th>名称</th>
+          <th class= "task_th">名称</th>
           <td><%= @task.title %></td>
         </tr>
         <tr>
-          <th>詳細</th>
-          <td><%= @task.detail %></td>
+          <th class= "task_th">詳細</th>
+          <td><%= Rinku.auto_link(@task.detail, :all, 'target="_blank"').html_safe %></td>
         </tr>
         <tr>
-          <th>作成日</th>
-          <td><%= @task.created_at %></td>
+          <th class= "task_th">作成日</th>
+          <td><%= l @task.created_at, format: :long %></td>
         </tr>
         <tr>
-          <th>更新日</th>
-          <td><%= @task.updated_at %></td>
+          <th class= "task_th">更新日</th>
+          <td><%= l @task.updated_at, format: :long %></td>
         </tr>
       </table>
       
       
       <%= link_to "編集", edit_task_path, class: "btn btn-lg btn-success" %>
-      <%= link_to "削除", "#", class: "btn btn-lg btn-danger" %>
+      <%= link_to "削除", task_path, method: :delete, class: "btn btn-lg btn-danger" %>
     </div>
   </div>
