@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = '新規作成に成功しました。'
+      flash[:success] = '新規作成に成功しました！！'
       redirect_to @user
     else
       render :new
@@ -29,9 +29,19 @@ class UsersController < ApplicationController
   def edit
   end
   
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+       flash[:success] = "ユーザー情報を更新しました！！"
+       redirect_to @user
+    else
+       render :edit
+    end
+  end
+  
   def destroy
     @user.destroy
-    flash[:success] = "#{@user.name}のデータを削除しました。"
+    flash[:success] = "#{@user.name}のデータを削除しました！！"
     redirect_to users_url
   end
 
@@ -47,7 +57,6 @@ class UsersController < ApplicationController
     
     def logged_in_user
       unless logged_in?
-        store_location
         flash[:danger] = "ログインしてください。"
         redirect_to login_url
       end

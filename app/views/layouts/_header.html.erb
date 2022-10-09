@@ -17,7 +17,7 @@
             <ul class="dropdown-menu">
               <li class="menu">ユーザー</li>
               <li><%= link_to "プロフィール", current_user %></li>
-              <li><%= link_to "設定", '#' %></li>
+              <li><%= link_to "設定", edit_user_path(current_user) %></li>
               <li class="menu">タスク</li>
               <li><%= link_to "タスク一覧", tasks_path %></li>
               <li class="divider"></li>

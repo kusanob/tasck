@@ -1,7 +1,10 @@
 class TasksController < ApplicationController
+  before_action :correct_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :admin_user, only: :destroy
   
   def index
-    @tasks = Task.all
+    @tasks = Task.where(user_id:current_user.id)
   end
   
   def show
@@ -9,15 +12,11 @@ class TasksController < ApplicationController
   end
   
   def new
-    @task =Task.new(params[:id])
+    @task = Task.new(params[:id])
   end
   
   def create
-    @task = Task.new(
-      user_id: current_user.id,
-      title: task_params[:title],
-      detail: task_params[:detail]
-      )
+    @task = Task.new(task_params)
     if @task.save
       flash[:success] = "投稿しました！"
       redirect_to tasks_path
@@ -53,7 +52,22 @@ class TasksController < ApplicationController
   private
     
     def task_params
-      params.require(:task).permit(:title, :detail)
+      params.require(:task).permit(:title, :detail).merge(user_id: current_user.id)
     end
-  
+
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "ログインしてください。"
+        redirect_to login_url
+      end
+    end
+    
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
+    end
+    
+    def admin_user
+      redirect_to root_url unless current_user.admin?
+    end
 end
