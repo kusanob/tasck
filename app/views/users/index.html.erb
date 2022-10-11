@@ -24,7 +24,10 @@
           <% if current_user.admin? && !current_user?(user) %>
            <div class="text-right">
             <%= link_to "削除", user, method: :delete,
-            data: { confirm: "削除してもよろしいですか？" },
+            data: { confirm: "本当に削除してもよろしいですか？",
+                    cancel: "キャンセル",
+                    commit: "削除",
+                    }, title: "#{user.name}のデータを削除します。",
             class: "btn btn-danger" %>
            </div>
           <% end %>

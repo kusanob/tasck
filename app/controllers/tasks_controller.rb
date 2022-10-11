@@ -1,14 +1,10 @@
 class TasksController < ApplicationController
-  before_action :correct_user, only: [:edit, :update]
   before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :correct_task, only: [:edit, :update, :show]
   before_action :admin_user, only: :destroy
   
   def index
-    @tasks = Task.where(user_id:current_user.id)
-  end
-  
-  def show
-    @task = Task.find(params[:id])
+    @tasks = Task.where(user_id: current_user.id).order(created_at: :desc)
   end
   
   def new
@@ -23,6 +19,10 @@ class TasksController < ApplicationController
     else
       render :new
     end
+  end
+  
+  def show
+    @task = Task.find(params[:id])
   end
   
   def edit
@@ -41,12 +41,9 @@ class TasksController < ApplicationController
   
   def destroy
     @task = Task.find(params[:id])
-    if @task.destroy
-      flash[:success] = "削除しました！"
-      redirect_to tasks_url
-    else
-      render :index
-    end
+    @task.destroy
+    flash[:success] = "#{@task.title}削除しました！"
+    redirect_to tasks_url
   end
   
   private
@@ -62,12 +59,13 @@ class TasksController < ApplicationController
       end
     end
     
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
+    def correct_task
+      unless current_user
+        redirect_to tasks_url
+      end
     end
-    
+
     def admin_user
       redirect_to root_url unless current_user.admin?
     end
-end
+end  

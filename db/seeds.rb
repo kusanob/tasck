@@ -24,10 +24,10 @@ end
   detail = Faker::JapaneseMedia::OnePiece.akuma_no_mi
   user.each {
     |user| user.tasks.create!(title: title, 
-                             detail: detail,
-                             user_id: user
-                             )
-  }
+                              detail: detail,
+                              user_id: user)
+  }    
+  
 
                
 end
