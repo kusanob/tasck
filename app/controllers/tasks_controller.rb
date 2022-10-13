@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :correct_task, only: [:edit, :update, :destroy]
   before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
   before_action :correct_task, only: [:edit, :update, :show]
   before_action :admin_user, only: :destroy
@@ -42,7 +43,7 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
-    flash[:success] = "#{@task.title}削除しました！"
+    flash[:success] = "#{@task.title}を削除しました！"
     redirect_to tasks_url
   end
   
@@ -60,8 +61,11 @@ class TasksController < ApplicationController
     end
     
     def correct_task
-      unless current_user
-        redirect_to tasks_url
+      @tasks = current_user.tasks
+      @task = @tasks.find_by(id: params[:id])
+      unless @task
+       flash[:danger] = "人のタスクをイジッてはいけません！"
+       redirect_to tasks_url
       end
     end
 
