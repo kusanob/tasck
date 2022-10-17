@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
   
-      <%= form_with(model: @task, local: true) do |f| %>
+      <%= form_with(model: @task, url: {controller: 'tasks', action: 'update' }, local: true) do |f| %>
         <%= render partial: 'shared/error_messages', locals: {object: @task} %>
 
         <%= f.label :title %> 
@@ -15,7 +15,7 @@
       
         <br>
         <%= f.submit "更新", class: "btn btn-sm btn-primary" %>
-        <%= link_to "キャンセル", tasks_path, class: "btn btn-sm btn-default" %>
+        <%= link_to "キャンセル", user_tasks_path, class: "btn btn-sm btn-default" %>
        
         
       <% end %>

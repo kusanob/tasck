@@ -5,7 +5,7 @@
   <div class= "row">
     <div class="col-md-10 col-md-offset-1">
       <div class="text-right">
-        <%= link_to "タスク新規作成", new_task_path, class: "btn btn-lg btn-primary" %>
+        <%= link_to "タスク新規作成", new_user_task_path, class: "btn btn-lg btn-primary" %>
       </div>
       
       <table class="table table-hover">
@@ -21,16 +21,15 @@
         
         <% @tasks.each do |task| %>
           <tr>
-            <td><%= link_to task.title, task_path(task.id), id: "a" %></td>
+            <td><%= link_to task.title, user_task_path(id: task), id: "a" %></td>
             <td><%= l task.created_at, format: :long %></td>
-            <td><%= link_to "編集", edit_task_path(task.id), class: "btn btn-sm btn-success" %>
-            <%= link_to "削除", task, method: :delete,
+            <td><%= link_to "編集", edit_user_task_path(id: task), class: "btn btn-sm btn-success" %>
+            <%= link_to "削除", user_task_path(id: task), method: :delete,
             data: { confirm: "本当に削除してもよろしいですか？",
                     cancel: "キャンセル",
                     commit: "削除",
                     }, title: "#{task.title}のデータを削除します。",
                 class: "btn btn-sm btn-danger" %></td>
-            
           </tr>
         <% end %>
         
